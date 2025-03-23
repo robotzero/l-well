@@ -38,7 +38,6 @@ func _physics_process(delta: float) -> void:
 			var radius := initial_radius + (radius_speed * time if movement_type == "spiral" else 0.0)
 			var angle := start_angle + angle_speed * time
 			position = center_point + Vector2(cos(angle), sin(angle)) * radius
-			move_and_slide()
 	
 	if position.x < -100:
 		queue_free()
