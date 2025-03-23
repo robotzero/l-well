@@ -31,11 +31,17 @@ var wave_schedule := [
 		"spacing": 60
 	},
 	{
-	"time": 12.0,
-	"type": "spiral",
-	"pos": Vector2(600, 400),
-	"clockwise": true
-	}
+		"time": 12.0,
+		"type": "spiral",
+		"pos": Vector2(600, 400),
+		"clockwise": true
+	},
+	#{
+		#"time": 16.0,
+		#"type": "arc",
+		#"pos": Vector2(600, 400),
+		#"clockwise": true
+	#}
 ]
 
 func _process(delta: float) -> void:
@@ -44,23 +50,15 @@ func _process(delta: float) -> void:
 	
 	if current_wave_index < wave_schedule.size():
 		var wave = wave_schedule[current_wave_index]
+		#var wave = wave_schedule[3]
 		if wave_timer >= wave["time"]:
 			spawn_wave_from_data(wave)
 			current_wave_index += 1
-	
-	#if wave_timer > 2.0 and wave_timer < 2.1:
-		#spawn_wave_vertical(5, Vector2(1200, 300), 40)
-	#
-	#if wave_timer > 15.0 and wave_timer < 15.1:
-		#spawn_wave_snake(6, Vector2(1200, 200), 40)
 		
 	if current_wave_index >= wave_schedule.size():
 		wave_timer = 0.0
 		current_wave_index = 0
 	
-	#if wave_timer > 20.0:
-		#wave_timer = 0.0
-		#
 	if time_passed >= level_length:
 		game_over()
 		

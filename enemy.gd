@@ -24,7 +24,11 @@ func _physics_process(delta: float) -> void:
 	
 	match movement_type:
 		"linear":
-			velocity = move_direction * speed
+			var base_movement := move_direction * speed
+			var wave_y := sin(time * frequency * wave_offset) * amplitude
+
+			velocity = base_movement
+			position.y += wave_y * delta
 			move_and_slide()
 
 		"sine":
