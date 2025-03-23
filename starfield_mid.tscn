@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://f646gofvqbfp"]
+
+[ext_resource type="Script" uid="uid://bsxggg3pp2aia" path="res://starfield_mid.gd" id="1_cpt45"]
+
+[node name="starfield_mid" type="ParallaxLayer"]
+script = ExtResource("1_cpt45")

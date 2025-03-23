@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uivtwikgecqj"]
+
+[ext_resource type="Script" uid="uid://yu1gw4gukb4w" path="res://starfield_far.gd" id="1_rku5q"]
+
+[node name="starfield_far" type="ParallaxLayer"]
+script = ExtResource("1_rku5q")

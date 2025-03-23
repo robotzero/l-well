@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://be1aaeenb4j5j"]
+
+[ext_resource type="Script" uid="uid://b50ly0ljgby3a" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dyagq6h4n5ey0" path="res://assets/starship.png" id="2_onrkg"]
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8.34465e-07, 0)
+scale = Vector2(0.921, 1)
+texture = ExtResource("2_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="BulletSpawn" type="Marker2D" parent="."]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1xgk6ayuqper"]
+
+[ext_resource type="Script" uid="uid://3q2qfp62mvd8" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xaro"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_7k104")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(1, 0.123745, 0.578506, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7xaro")
