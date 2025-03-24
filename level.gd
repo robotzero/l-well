@@ -30,18 +30,19 @@ var wave_schedule := [
 		"start_pos": Vector2(600, 0),
 		"spacing": 60
 	},
-	{
-		"time": 12.0,
-		"type": "spiral",
-		"pos": Vector2(600, 400),
-		"clockwise": true
-	},
 	#{
-		#"time": 16.0,
-		#"type": "arc",
-		#"pos": Vector2(600, 400),
+		#"time": 12.0,
+		#"type": "spiral",
+		#"start_pos": Vector2(600, 0),
 		#"clockwise": true
-	#}
+	#},
+	{
+		"time": 15.0,
+		"type": "arc",
+		"start_pos": Vector2(600, 0),
+		"clockwise": true,
+		"spacing": 20,
+	}
 ]
 
 func _process(delta: float) -> void:
@@ -50,7 +51,6 @@ func _process(delta: float) -> void:
 	
 	if current_wave_index < wave_schedule.size():
 		var wave = wave_schedule[current_wave_index]
-		#var wave = wave_schedule[3]
 		if wave_timer >= wave["time"]:
 			spawn_wave_from_data(wave)
 			current_wave_index += 1
@@ -66,28 +66,39 @@ func game_over() -> void:
 	get_tree().quit()
 	
 func spawn_wave_from_data(wave: Dictionary) -> void:
+	var rng = RandomNumberGenerator.new()
 	match wave["type"]:
 		"horizontal":
+			var random_y_offset := Vector2(600, rng.randi_range(-200, 200))
 			spawn_wave_horizontal(
 				wave.get("count", 5),
-				wave.get("offset", Vector2(600, 0))
+				wave.get("offset", random_y_offset)
 			)
 		"vertical":
+			var random_y_offset := Vector2(600, rng.randi_range(-200, 200))
 			spawn_wave_vertical(
 				wave.get("count", 5),
-				wave.get("offset", Vector2(600, 0)),
+				wave.get("offset", random_y_offset),
 				wave.get("spacing", 50)
 			)
 		"snake":
+			var random_y_offset := Vector2(600, rng.randi_range(-200, 200))
 			spawn_wave_snake(
-				wave.get("count", 5),
-				wave.get("offset", Vector2(600, 0)),
-				wave.get("spacing", 50)
+				wave.get("count", 3),
+				wave.get("offset", random_y_offset),
+				wave.get("spacing", 40)
 			)
 		"spiral":
 			spawn_spiral_enemy(
 				get_camera_world_position() + wave.get("pos", Vector2.ZERO),
 				wave.get("clockwise", true)
+			)
+		"arc":
+			var random_y_offset := Vector2(600, rng.randi_range(-200, 200))
+			spawn_wave_arc(
+				wave.get("count", 3),
+				wave.get("offset", random_y_offset),
+				wave.get("spacing"),
 			)
 		_:
 			print("Unknown wave type:", wave["type"])	
@@ -139,15 +150,18 @@ func spawn_spiral_enemy(pos: Vector2, clockwise := true):
 	enemy.start_angle = 0.0
 	enemy_container.add_child(enemy)
 
-func spawn_arc_enemy(pos: Vector2):
-	var enemy = enemy_scene.instantiate()
-	enemy.position = pos
-	enemy.center_point = pos
-	enemy.movement_type = "arc"
-	enemy.initial_radius = 100
-	enemy.angle_speed = 2.0
-	enemy.start_angle = PI / 2
-	enemy_container.add_child(enemy)
+func spawn_wave_arc(count: int,  offset: Vector2, spacing: float):
+	for i in range(count):
+		var cam_pos := get_camera_world_position()
+		var start_pos = cam_pos + offset
+		var enemy = enemy_scene.instantiate()
+		enemy.position = start_pos + Vector2(i * spacing, i * spacing)
+		enemy.center_point = start_pos + Vector2(i * spacing, i * spacing)
+		enemy.movement_type = "arc"
+		enemy.initial_radius = 30
+		enemy.angle_speed = 6.0
+		enemy.start_angle = PI / 2
+		enemy_container.add_child(enemy)
 
 
 func get_camera_world_position() -> Vector2:

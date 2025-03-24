@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 100.0
+@export var speed := 200.0
 @export var amplitude := 40.0
 @export var frequency := 2.0
 @export var move_direction := Vector2.LEFT

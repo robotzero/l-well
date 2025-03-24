@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djbyw5k5o8y0v"]
+[gd_scene load_steps=9 format=3 uid="uid://djbyw5k5o8y0v"]
 
 [ext_resource type="PackedScene" uid="uid://uivtwikgecqj" path="res://starfield_far.tscn" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://be1aaeenb4j5j" path="res://player.tscn" id="1_ig7tw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dot7ngdiqcpjp" path="res://starfield_near.tscn" id="3_7mycd"]
 [ext_resource type="Script" uid="uid://d22udjjye31mb" path="res://camera_2d.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c1xgk6ayuqper" path="res://enemy.tscn" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://caq1eugvfjfa4" path="res://player_bullet.tscn" id="7_5vw27"]
 
 [node name="Main" type="Node2D"]
 
@@ -24,10 +25,11 @@ enemy_scene = ExtResource("6_272bh")
 camera = NodePath("../Camera2D")
 
 [node name="player" parent="level" instance=ExtResource("1_ig7tw")]
-position = Vector2(535, 271)
+position = Vector2(575, 328)
+bullet_scene = ExtResource("7_5vw27")
 
 [node name="Enemies" type="Node2D" parent="level"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 331)
+position = Vector2(576, 326)
 script = ExtResource("3_h2yge")
